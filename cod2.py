@@ -1,4 +1,5 @@
 # уравнения
+import math
 class Equation:  # f(x) = 0
 
     def __init__(self, *function):
@@ -46,13 +47,11 @@ class СubicEquations():
         return list(num.roots(self.coefs[::-1]))
 
 
-class PolynomialEquation(Equation):  # ax^n + bx^(n-1) + ... + zx + y = 0
-    def __init__(self, *args):  # 5x^3 - 3x  = 0 [5, 0, -3, 0]
-        #         print('Init : PolynomialEquationCls')
+class PolynomialEquation(Equation):
+    def __init__(self, *args):
         self.coefs = list(args)[::-1]
 
-    def __str__(self):  #
-        # [1, 2, 3, 5] -> 5x^3 + 3x^2 + 2x + 1 = 0
+    def __str__(self):
         to_print = ' + {} = 0'.format(self.coefs[0])
         for i, coef in enumerate(self.coefs[1:]):
             if coef == 0:
@@ -72,9 +71,15 @@ class PolynomialEquation(Equation):  # ax^n + bx^(n-1) + ... + zx + y = 0
     def __call__(self, x):
         return self.__val(x)
 
-    def solve(self):  # __________________________задание 6, урок 16_________
-        import numpy as num
-        return list(num.roots(self.coefs[::-1]))
+    def solve(self, a, b, c):  # __________________________задание 6, урок 16_________
+
+        q = c - (a * b / 3) + (2 * a * a * a / 27)
+        p = b - (a * a / 3)
+        import math
+        r = (-q / 2 + (q * q / 4 + p * p * p / 27)**0.5) ** (1 / 3)
+        l = (-q / 2 - (q * q / 4 + p * p * p / 27)**0.5) ** (1 / 3)
+
+        return r + l
 
 
 print("______задание 6, урок 16_____________________________")
@@ -87,4 +92,4 @@ print(a.solve(-1000, 1000))
 
 print("_______задание 5, урок 16____________________________")
 a = СubicEquations(-2, 8, 0)
-print(*a.solve())
+print(*a.solve(-2, 8, 0))
