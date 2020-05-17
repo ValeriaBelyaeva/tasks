@@ -1,1 +1,1 @@
-print("hello world")
+from seaborn import pairplot

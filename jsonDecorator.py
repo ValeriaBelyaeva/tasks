@@ -2,7 +2,11 @@ def to_json(funk):
     import json
     data = funk()
     json_string = json.dumps(data)
-    return json_string
+
+    def data():
+        return json_string
+
+    return data
 
 
 @to_json
@@ -14,4 +18,4 @@ def get_data():
     }
 
 
-print(get_data)
+print(get_data())
